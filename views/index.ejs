@@ -1,39 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do App</title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>To-Do List</h1>
-      <form action="/tasks" method="POST">
-        <input type="text" name="name" placeholder="New task" />
-        <button type="submit">Add</button>
-      </form>
-      <ul>
-        <% tasks.forEach(task => { %>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <form action="/tasks" method="POST">
+      <input type="text" name="name" placeholder="Nouvelle tâche" />
+      <button type="submit">Ajouter</button>
+    </form>
+    <ul>
+      <% tasks.forEach(task => { %>
         <li class="<%= task.completed ? 'completed' : '' %>">
           <span><%= task.name %></span>
-          <form
-            action="/tasks/<%= task._id %>/complete"
-            method="POST"
-            style="display: inline"
-          >
-            <button type="submit">Complete</button>
-          </form>
-          <form
-            action="/tasks/<%= task._id %>/delete"
-            method="POST"
-            style="display: inline"
-          >
-            <button type="submit">Delete</button>
-          </form>
+          <div class="actions">
+            <form action="/tasks/<%= task._id %>/complete" method="POST">
+              <button type="submit">Compléter</button>
+            </form>
+            <form action="/tasks/<%= task._id %>/delete" method="POST">
+              <button type="submit">Supprimer</button>
+            </form>
+          </div>
         </li>
-        <% }) %>
-      </ul>
-    </div>
-  </body>
+      <% }) %>
+    </ul>
+  </div>
+</body>
 </html>

@@ -1,23 +1,20 @@
-# Utiliser une image Node.js officielle comme image de base
-FROM node:14
+# Utilisation d'une image de base Node.js
+FROM node:latest
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copier le package.json et le package-lock.json dans le répertoire de travail
-COPY package*.json ./
+# Copier les fichiers nécessaires dans le conteneur
+COPY package.json package-lock.json /app/
 
-# Installer les dépendances de l'application
+# Installer les dépendances
 RUN npm install
 
-# Installation des dépendances de développement (mocha et chai)
-RUN npm install --save-dev mocha chai
+# Copier le reste des fichiers de l'application
+COPY . /app/
 
-# Copier le reste de l'application dans le répertoire de travail
-COPY . .
-
-# Exposer le port sur lequel l'application écoute (port 3000 dans cet exemple)
+# Exposer le port sur lequel l'application s'exécute
 EXPOSE 3002
 
-# Définir la commande pour démarrer l'application
+# Commande pour démarrer l'application
 CMD ["node", "app.js"]

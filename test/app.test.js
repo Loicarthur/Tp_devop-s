@@ -5,7 +5,6 @@ const Task = require("../models/task"); // Modifiez ceci pour utiliser le modèl
 
 const expect = chai.expect;
 chai.use(chaiHttp);
-
 describe("Task API", () => {
   beforeEach(async () => {
     await Task.deleteMany({});
