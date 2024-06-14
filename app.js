@@ -1,6 +1,6 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 const app = express();
 
@@ -11,15 +11,14 @@ mongoose.connect("mongodb://localhost/todo-app", {
 });
 
 // Define a Task model
-const Task = mongoose.model(
-  "Task",
-  new mongoose.Schema({
-    name: String,
-    completed: Boolean,
-  })
-);
+const taskSchema = new mongoose.Schema({
+  name: String,
+  completed: Boolean,
+});
 
-app.set("view engine", "ejs");
+const Task = mongoose.model('Task', taskSchema);
+
+app.set("view engine", "ejs"); // Ensure this line is present
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
